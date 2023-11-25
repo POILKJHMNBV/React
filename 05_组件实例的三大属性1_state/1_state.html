@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+
+    // 1.创建类式组件
+    class Weather extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {isHot: false};
+
+            // 解决 changeWeather 中 this 指向问题
+            this.changeWeather = this.changeWeather.bind(this);
+        }
+
+        render() {
+            console.log(this);
+            return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+        }
+
+        changeWeather() {
+            // changeWeather 放在 Weather 的原型上
+            // 通过 Weather 实例调用 changeWeather 时，changeWeather 中的 this 就是Weather实例
+            // 由于changeWeather是作为onclick的回调，所以不是通过实例调用的，是直接调用
+            // 类中的方法默认开启了局部的严格模式，所以changeWeather中的this为undefined
+
+            // 注意：React中的state不可以直接更改，必须通过setState进行更新
+            /*const isHot = this.state.isHot;
+            this.state.isHot = !isHot;*/
+
+            const isHot = this.state.isHot;
+            this.setState({isHot: !isHot}, () => {
+
+            });
+        }
+    }
+
+    // 2.渲染组件到页面
+    ReactDOM.render(<Weather/>, document.getElementById('test'));
+</script>
+</body>
+</html>

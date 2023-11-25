@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <title>JSX语法规则</title>
     <style>
-      .title {
-        background-color: orange;
-      }
+        .title {
+            background-color: orange;
+        }
     </style>
 </head>
 <body>
-  <div id="test">
+<div id="test">
 
-  </div>
-  <script type="text/javascript" src="../js/react.development.js"></script>
-  <script type="text/javascript" src="../js/react-dom.development.js"></script>
-  <script type="text/javascript" src="../js/babel.min.js"></script>
-  <script type="text/babel">
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
     const id = 'title';
     const data = 'Hello React!';
     const framework = ['Angular', 'React', 'Vue'];
@@ -24,7 +24,7 @@
     const VDOM = (
         <div>
             <h2 className="title" id={id}>
-                <span style={{color:'pink', fontSize:'30px'}}>{data}</span>
+                <span style={{color: 'pink', fontSize: '30px'}}>{data}</span>
             </h2>
             <ul>
                 {
@@ -50,6 +50,6 @@
           （1）若小写字母开头，则转为html标签
           （2）若大写字母开头，则视为组件
      */
-  </script>
+</script>
 </body>
 </html>
