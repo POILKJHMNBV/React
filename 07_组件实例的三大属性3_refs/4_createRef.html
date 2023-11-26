@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>createRef</title>
+</head>
+<body>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+
+    // 1.创建类式组件
+    class Weather extends React.Component {
+        state = {isHot: false};
+
+        // React.createRef调用后可以返回一个容器，该容器可以存储被ref所标识的节点
+        myRef = React.createRef();
+
+        render() {
+            return (
+                <div>
+                    <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h1>
+                    <label>
+                        <input ref={this.myRef}
+                               onBlur={this.blurPrompt}
+                               type="text"
+                               placeholder="失去焦点提示数据"/>
+                    </label>
+                </div>
+            )
+        }
+
+        changeWeather = () => {
+            const isHot = this.state.isHot;
+            this.setState({isHot: !isHot}, () => {
+            });
+        }
+
+        blurPrompt = () => {
+            alert(this.myRef.current.value);
+        }
+    }
+
+    // 2.渲染组件到页面
+    ReactDOM.render(<Weather/>, document.getElementById('test'));
+</script>
+</body>
+</body>
+</html>

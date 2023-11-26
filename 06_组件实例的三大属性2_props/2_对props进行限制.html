@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>对props进行限制</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<div id="test1">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/babel">
+    class Person extends React.Component {
+        render() {
+            const {name, gender, age} = this.props;
+            return (
+                <ul>
+                    <li>姓名：{name}</li>
+                    <li>性别：{gender}</li>
+                    <li>年龄：{age + 1}</li>
+                </ul>
+            )
+        }
+    }
+
+    // 限制props的类型和必输性
+    Person.propTypes = {
+        name: PropTypes.string.isRequired,
+        gender: PropTypes.string,
+        age: PropTypes.number
+    }
+
+    // 给定props的默认值
+    Person.defaultProps = {
+        gender: 'male',
+        age: 18
+    }
+
+    const p1 = {name: 'jerry', gender: 'female', age: 19}
+    const p2 = {name: 'rose', gender: 'female'}
+    ReactDOM.render(<Person {...p1}/>, document.getElementById('test'));
+    ReactDOM.render(<Person {...p2}/>, document.getElementById('test1'));
+    // ReactDOM.render(<Person name="tom" gender="male" age="18"/>, document.getElementById('test'));
+</script>
+</body>
+</html>

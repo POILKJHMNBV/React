@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>回调形式的ref</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+    class MyComponent extends React.Component {
+        render() {
+            return (
+                <div>
+                    <label>
+                        <input ref={c => this.input1 = c} type="text" placeholder="点击按钮提示数据"/>
+                    </label>&nbsp;
+                    <button onClick={this.clickPrompt}>点我提示左侧数据</button>
+                    &nbsp;
+                    <label>
+                        <input ref={c => this.input2 = c} onBlur={this.blurPrompt} type="text"
+                               placeholder="失去焦点提示数据"/>
+                    </label>
+                </div>
+            );
+        }
+
+        clickPrompt = () => {
+            alert(this.input1.value);
+        }
+
+        blurPrompt = () => {
+            alert(this.input2.value);
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById('test'));
+</script>
+</body>
+</html>

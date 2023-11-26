@@ -19,13 +19,15 @@
                 <ul>
                     <li>姓名：{name}</li>
                     <li>性别：{gender}</li>
-                    <li>年龄：{age}</li>
+                    <li>年龄：{age + 1}</li>
                 </ul>
             )
         }
     }
 
-    ReactDOM.render(<Person name="tom" gender="male" age="18"/>, document.getElementById('test'));
+    const p = {name: 'jerry', gender: 'female', age: 18}
+    ReactDOM.render(<Person {...p}/>, document.getElementById('test'));
+    // ReactDOM.render(<Person name="tom" gender="male" age="18"/>, document.getElementById('test'));
 </script>
 </body>
 </html>

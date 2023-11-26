@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ref的基本使用(字符串形式)</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+    class MyComponent extends React.Component {
+        render() {
+            return (
+                <div>
+                    <label>
+                        <input ref="input1" type="text" placeholder="点击按钮提示数据"/>
+                    </label>&nbsp;
+                    <button onClick={this.clickPrompt}>点我提示左侧数据</button>
+                    &nbsp;
+                    <label>
+                        <input ref="input2" onBlur={this.blurPrompt} type="text" placeholder="失去焦点提示数据"/>
+                    </label>
+                </div>
+            );
+        }
+
+        clickPrompt = () => {
+            const {input1} = this.refs;
+            alert(input1.value);
+        }
+
+        blurPrompt = () => {
+            const {input2} = this.refs;
+            alert(input2.value);
+        }
+    }
+
+    ReactDOM.render(<MyComponent/>, document.getElementById('test'));
+</script>
+</body>
+</html>
