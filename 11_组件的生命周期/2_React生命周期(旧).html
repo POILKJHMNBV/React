@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React生命周期(旧)</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+    class Count extends React.Component {
+
+        constructor(props) {
+            console.log('Count-constructor');
+            super(props);
+            this.state = {count: 0}
+        }
+
+        add = () => {
+            const {count} = this.state;
+            this.setState({count: count + 1}, () => {
+
+            })
+        }
+
+        force = () => {
+            this.forceUpdate(() => {
+
+            });
+        }
+
+        componentWillMount() {
+            console.log('Count-componentWillMount');
+        }
+
+        componentDidMount() {
+            console.log('Count-componentDidMount');
+        }
+
+        // 组件是否应该被更新
+        shouldComponentUpdate() {
+            console.log('Count-shouldComponentUpdate');
+            return true;
+        }
+
+        componentWillUpdate() {
+            console.log('Count-componentWillUpdate');
+        }
+
+        componentDidUpdate() {
+            console.log('Count-componentDidUpdate');
+        }
+
+        render() {
+            const {count} = this.state;
+            console.log('Count-render');
+            return (
+                <div>
+                    <h2>当前求和为{count}</h2>
+                    <button onClick={this.add}>点击+1</button>
+                    <button onClick={this.force}>强制更新</button>
+                </div>
+            );
+        }
+    }
+
+    class A extends React.Component {
+
+        state = {carName:'奔驰'}
+
+        changeCar = () => {
+            let {carName} = this.state;
+            carName = carName === '奔驰' ? '宝马' : '奔驰';
+            this.setState({carName:carName}, () => {
+
+            });
+        }
+
+        render() {
+            return (
+                <div>
+                    <div>A组件</div>
+                    <button onClick={this.changeCar}>换车</button>
+                    <B carName={this.state.carName}/>
+                </div>
+            );
+        }
+    }
+
+    class B extends React.Component {
+
+        componentWillReceiveProps(props) {
+            console.log('B-componentWillReceiveProps', props);
+        }
+
+        render() {
+            return (
+                <div>B组件：A要买的车是{this.props.carName}</div>
+            );
+        }
+    }
+
+    // ReactDOM.render(<Count/>, document.getElementById('test'));
+    ReactDOM.render(<A/>, document.getElementById('test'));
+</script>
+</body>
+</html>
