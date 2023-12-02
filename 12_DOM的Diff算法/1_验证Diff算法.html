@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>验证Diff算法</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/React18.2/react.development.js"></script>
+<script type="text/javascript" src="../js/React18.2/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/React18.2/babel.min.js"></script>
+<script type="text/babel">
+    class Time extends React.Component {
+        state = {date: new Date()}
+
+        componentDidMount() {
+            setInterval(() => {
+                this.setState({
+                    date: new Date()
+                }, () => {
+
+                })
+            }, 1000)
+        }
+
+        render() {
+            return (
+                <div>
+                    <h1>Hello React!</h1>
+                    <label>
+                        <input type="text"/>
+                    </label>
+                    <br/>
+                    <span>现在是：{this.state.date.toTimeString()}</span>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Time/>, document.getElementById('test'));
+</script>
+</body>
+</html>

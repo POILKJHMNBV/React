@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>key的作用</title>
+</head>
+<body>
+<div id="test">
+
+</div>
+<script type="text/javascript" src="../js/React18.2/react.development.js"></script>
+<script type="text/javascript" src="../js/React18.2/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/React18.2/babel.min.js"></script>
+<script type="text/babel">
+    class Person extends React.Component {
+
+        state = {
+            persons: [
+                {id: 1, name: '小李', age: 18},
+                {id: 2, name: '小张', age: 19}
+            ]
+        }
+
+        addPerson = () => {
+            const {persons} = this.state;
+            const person = {id: persons.length + 1, name: '小王', age: 20};
+            this.setState({persons: [person, ...persons]});
+        }
+
+        render() {
+            return (
+                <div>
+                    <h2>index展示人员列表</h2>
+                    <button onClick={this.addPerson}>添加人员</button>
+                    <ul>
+                        {
+                            this.state.persons.map((person, index) => {
+                                return <li key={index}>{person.name}：{person.age}</li>
+                            })
+                        }
+                    </ul>
+                    <hr/>
+                    <h2>id展示人员列表</h2>
+                    <button onClick={this.addPerson}>添加人员</button>
+                    <ul>
+                        {
+                            this.state.persons.map((person) => {
+                                return <li key={person.id}>{person.name}：{person.age}</li>
+                            })
+                        }
+                    </ul>
+                </div>
+            );
+        }
+    }
+
+    ReactDOM.render(<Person/>, document.getElementById('test'));
+</script>
+</body>
+</html>
